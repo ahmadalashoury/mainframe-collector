@@ -80,31 +80,6 @@ python3 scripts/collect_software_heritage.py --language pli --output ./collected
 python3 scripts/validate_and_report.py --input ./collected/pli --language pli --final ./collected/pli/final
 ```
 
-## PL/I Collection Challenges
-
-PL/I is the hardest mainframe language to collect because:
-
-1. **GitHub doesn't recognize PL/I** — `language:PLI` doesn't work
-2. **File extensions overlap** — `.pl1` can be confused with Perl
-3. **Most PL/I code is proprietary** — never published publicly
-4. **Very low volume** — IBM's own Granite LLM had 0 PL/I training files
-
-### Mitigations built into this toolkit:
-
-- Content validation using PL/I-specific syntax patterns
-- Negative pattern matching to exclude Perl false positives
-- Multiple search queries targeting PL/I keywords
-- Software Heritage fallback for deleted/archived repos
-- Adjustable minimum file size (`--min-chars 5000`)
-
-### If you still can't reach 1,000 PL/I files:
-
-1. **Relax the threshold** — `5000` chars is still useful for training
-2. **Add more repo URLs** — edit `KNOWN_REPOS` in `collect_known_repos.py`
-3. **Contact PL/I communities** — IBM PL/I compiler team, Kednos
-4. **Check SourceForge** — legacy projects: `https://sourceforge.net/directory/?q=PL%2FI`
-5. **Consider synthetic data** — generate from PL/I grammar as augmentation
-6. **Use Zorse project** — https://github.com/openmainframeproject/tac/issues/642
 
 ## Authentication Tokens
 
