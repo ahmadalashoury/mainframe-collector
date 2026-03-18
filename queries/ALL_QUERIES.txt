@@ -1,0 +1,351 @@
+# Mainframe Source Code Queries — Complete Reference
+#
+# This file contains all queries organized by source platform and language.
+# Use these queries with the collection scripts or manually in web UIs.
+#
+# Target: >= 1,000 files of >= 10,000 chars per language
+# Priority language: PL/I
+
+##############################################################################
+# 1. GITHUB — Repository Search Queries
+#    Endpoint: https://api.github.com/search/repositories?q=<QUERY>
+#    Rate limit: 30 req/min (general search), 5000 req/hr (general API)
+#    Returns: repo metadata (clone_url, etc.)
+#    Strategy: Find repos → git clone --depth 1 → extract files locally
+##############################################################################
+
+### PL/I (GitHub does NOT have language:PLI — use keyword search)
+
+PLI mainframe
+PL/I source code
+PL1 compiler
+PL/I z/OS
+pl1 mainframe programming
+PLI CICS
+PLI DB2
+PROCEDURE OPTIONS MAIN pl1
+zopeneditor PLI
+enterprise PLI
+iron spring PL/I
+PL1GCC
+pli language support
+mainframe PL/I samples
+pl1 examples mainframe
+PL/I programming
+PL/I tutorial
+PLI test suite
+pl1 source IBM
+IBM PL/I compiler
+
+### COBOL
+
+language:COBOL
+COBOL mainframe
+COBOL z/OS
+COBOL CICS
+COBOL DB2
+COBOL VSAM
+GnuCOBOL
+cobol-check
+cobol programming course
+cobol examples
+enterprise COBOL
+COBOL copybook
+mainframe COBOL samples
+COBOL batch processing
+COBOL IMS
+COBOL unit test
+cobol modernization
+COBOL to Java
+micro focus COBOL
+
+### REXX
+
+REXX mainframe
+REXX z/OS
+REXX TSO
+REXX ISPF
+ooRexx
+Regina REXX
+REXX exec
+REXX scripts mainframe
+topic:rexx
+REXX utilities
+REXX examples
+zVM REXX
+REXX programming
+netrexx
+brexx
+
+### JCL
+
+JCL mainframe
+JCL z/OS
+JCL job
+JCL examples
+JCL procedures
+JCL PROC
+mainframe JCL samples
+MVS JCL
+JCL batch
+
+### HLASM
+
+HLASM mainframe
+HLASM z/OS
+assembler mainframe z/OS
+MVS assembler
+370 assembler
+mainframe assembler samples
+HLASM macro
+s390 assembler
+z/Architecture assembler
+
+
+##############################################################################
+# 2. GITHUB — Code Search Queries
+#    Endpoint: https://api.github.com/search/code?q=<QUERY>
+#    Rate limit: 10 req/min (STRICT — use sparingly)
+#    Returns: file-level results with repo info
+#    Use these AFTER exhausting repo search
+##############################################################################
+
+### PL/I — High precision, path-filtered
+
+PROCEDURE OPTIONS(MAIN) path:*.pli
+DECLARE FIXED BINARY path:*.pli
+DCL CHAR VARYING path:*.pl1
+PUT SKIP LIST path:*.pli
+%INCLUDE path:*.pli
+PROC OPTIONS(MAIN) path:*.pl1
+ALLOCATE BASED path:*.pli
+ON ENDFILE path:*.pli
+FETCH path:*.pli
+BEGIN DECLARE path:*.pl1
+DCL FIXED BIN path:*.pli
+CONTROLLED ALLOCATE path:*.pl1
+ENTRY RETURNS path:*.pli
+AREA OFFSET path:*.pli
+
+### PL/I — Broader queries (more results but more false positives)
+
+PROCEDURE OPTIONS(MAIN) extension:pli
+PROCEDURE OPTIONS(MAIN) extension:pl1
+DCL FIXED BINARY extension:pli
+PUT SKIP LIST extension:pl1
+
+### COBOL — Uses language: qualifier (GitHub recognizes COBOL)
+
+language:COBOL "IDENTIFICATION DIVISION"
+language:COBOL "PROCEDURE DIVISION"
+language:COBOL "WORKING-STORAGE SECTION"
+language:COBOL "PERFORM" "MOVE"
+language:COBOL "EVALUATE" "WHEN"
+language:COBOL "EXEC SQL"
+language:COBOL "EXEC CICS"
+"IDENTIFICATION DIVISION" "DATA DIVISION" path:*.cbl
+"PROCEDURE DIVISION" "PERFORM" path:*.cob
+
+### REXX
+
+"SAY" "PARSE" path:*.rexx
+"ADDRESS TSO" path:*.rexx
+"EXECIO" path:*.rexx
+"SIGNAL ON" path:*.rexx
+"DO" "END" "SAY" path:*.rex
+"PARSE ARG" path:*.rexx
+"/* REXX */" path:*.rexx
+
+### JCL
+
+"//JOB" "//EXEC" path:*.jcl
+"DD DSN=" "DISP=" path:*.jcl
+"//STEP" "PGM=" path:*.jcl
+"SYSOUT" "SYSIN" path:*.jcl
+
+### HLASM
+
+"CSECT" "USING" path:*.asm
+"BALR" "USING" path:*.hlasm
+"DS" "DC" "CSECT" path:*.asm
+
+
+##############################################################################
+# 3. GITHUB — Web UI Search Queries
+#    URL: https://github.com/search?type=code&q=<QUERY>
+#    Limit: 100 results per query (5 pages × 20)
+#    Use for manual exploration to discover repos not found via API
+##############################################################################
+
+### PL/I (your improved starting query)
+
+PROC MAIN OPTIONS(MAIN) OR DECLARE OR DCL OR PUT SKIP LIST OR %INCLUDE OR *PROCESS NOT perl ((path:*.pli OR path:*.pl1) AND NOT (path:*.incl.pl1 OR path:*.c.pl1 OR path:*.1.pl1)) NOT "// JOB" NOT "// EXEC" NOT "// DD"
+
+### PL/I — Simplified high-precision queries (use these one at a time)
+
+path:*.pli "PROC" "OPTIONS(MAIN)"
+path:*.pli "DCL" "FIXED" "BIN"
+path:*.pl1 "DECLARE" "CHAR"
+path:*.pli "%INCLUDE"
+path:*.pli "PUT SKIP LIST"
+path:*.pli "ON ENDFILE"
+path:*.pli "ALLOCATE" "BASED"
+path:*.pl1 "CONTROLLED"
+path:*.pli "ENTRY" "RETURNS"
+path:*.pli NOT "#!/usr/bin/perl" "PROCEDURE"
+
+
+##############################################################################
+# 4. GITLAB — Search Queries
+#    API: https://gitlab.com/api/v4/search?scope=projects&search=<QUERY>
+#    API: https://gitlab.com/api/v4/search?scope=blobs&search=<QUERY>
+#    Rate: 10 req/sec (authenticated)
+#    Web: https://gitlab.com/explore/projects?search=<QUERY>
+##############################################################################
+
+### Projects
+
+PL/I mainframe
+PLI source
+PL1 compiler
+PL/I z/OS
+COBOL
+COBOL mainframe
+GnuCOBOL
+COBOL z/OS
+enterprise COBOL
+REXX
+REXX mainframe
+ooRexx
+Regina REXX
+JCL mainframe
+JCL z/OS
+HLASM
+mainframe assembler
+
+### Blobs (code search)
+
+PROCEDURE OPTIONS MAIN
+DECLARE FIXED BINARY
+DCL CHAR VARYING
+PUT SKIP LIST
+IDENTIFICATION DIVISION
+PROCEDURE DIVISION
+WORKING-STORAGE SECTION
+PARSE ARG
+ADDRESS TSO
+CSECT USING BALR
+
+### Topics (browse)
+
+https://gitlab.com/explore/projects/topics/cobol
+https://gitlab.com/explore/projects/topics/mainframe
+https://gitlab.com/explore/projects/topics/rexx
+https://gitlab.com/explore/projects/topics/pli
+
+
+##############################################################################
+# 5. HUGGING FACE — Dataset Queries
+#    Use the `datasets` Python library
+#    No per-file rate limit — bulk download
+##############################################################################
+
+### The Stack v1 (deduplicated, 358 languages)
+# COBOL is present. PL/I is NOT present (not in GitHub linguist).
+from datasets import load_dataset
+ds = load_dataset("bigcode/the-stack-dedup", data_dir="data/cobol", split="train", streaming=True)
+
+### The Stack v2 (658 languages, from Software Heritage)
+# Broader coverage, but requires SWH agreement for bulk download.
+ds = load_dataset("bigcode/the-stack-v2", data_dir="data/cobol", split="train")
+
+### The Stack small (quick testing — 10K samples per language)
+ds = load_dataset("bigcode/the-stack-smol-xl", data_dir="data/cobol", split="train")
+
+### Rosetta Code (labeled, 883 languages including PL/I, COBOL, REXX)
+ds = load_dataset("bigcode/rosetta-code", split="train")
+# Filter: [x for x in ds if x.get("language") == "PL/I"]
+# NOTE: Files are short (algorithm exercises). Below 10K chars threshold
+#        but useful for validation / supplementary training data.
+
+
+##############################################################################
+# 6. SOFTWARE HERITAGE — API Queries
+#    API root: https://archive.softwareheritage.org/api/1/
+#    Rate: 60 req/hr anonymous, more with auth token
+#    Strategy: Look up known repos → walk directory trees → download files
+##############################################################################
+
+### Origin lookup (find a repo in the archive)
+GET https://archive.softwareheritage.org/api/1/origin/https://github.com/RobJTingay/PL1GCC/get/
+GET https://archive.softwareheritage.org/api/1/origin/https://github.com/openmainframeproject/cobol-code-dataset/get/
+GET https://archive.softwareheritage.org/api/1/origin/https://github.com/IBM/zopeneditor-sample/get/
+
+### S3 bulk content access (bypass API rate limits)
+# File content available at: s3://softwareheritage/content/<sha1>
+# or: https://softwareheritage.s3.amazonaws.com/content/<sha1>
+# Requires knowing the SHA1 hash (from graph dataset or API directory walks)
+
+
+##############################################################################
+# 7. KNOWN HIGH-VALUE REPOSITORIES — Direct Clone
+#    These are VERIFIED to contain mainframe source code.
+#    git clone --depth 1 <URL>
+##############################################################################
+
+### PL/I
+git clone --depth 1 https://github.com/RobJTingay/PL1GCC.git
+git clone --depth 1 https://github.com/IBM/zopeneditor-sample.git
+git clone --depth 1 https://github.com/zowe/zowe-pli-language-support.git
+git clone --depth 1 https://github.com/IBA-mainframe-dev/Global-Repository-for-Mainframe-Developers.git
+
+### COBOL
+git clone --depth 1 https://github.com/openmainframeproject/cobol-code-dataset.git
+git clone --depth 1 https://github.com/openmainframeproject/cobol-programming-course.git
+git clone --depth 1 https://github.com/openmainframeproject/cobol-check.git
+git clone --depth 1 https://github.com/OCamlPro/gnucobol.git
+git clone --depth 1 https://github.com/opensourcecobol/opensourcecobol4j.git
+git clone --depth 1 https://github.com/IBM/zopeneditor-sample.git
+
+### REXX
+git clone --depth 1 https://github.com/RexxLA/rexx-repository.git
+git clone --depth 1 https://github.com/mvslovers/brexx.git
+git clone --depth 1 https://github.com/IBA-mainframe-dev/Global-Repository-for-Mainframe-Developers.git
+
+### Multi-language mainframe
+git clone --depth 1 https://github.com/IBA-mainframe-dev/Global-Repository-for-Mainframe-Developers.git
+git clone --depth 1 https://github.com/IBM/zopeneditor-sample.git
+git clone --depth 1 https://github.com/mvslovers/mvs38j-langtest.git
+git clone --depth 1 https://github.com/FSoft-AI4Code/XMainframe.git
+
+
+##############################################################################
+# 8. LOCAL FILE EXTRACTION COMMANDS
+#    Run these after cloning repos to find and count matching files
+##############################################################################
+
+### Find PL/I files >= 10000 bytes
+find . -name "*.pli" -o -name "*.pl1" -o -name "*.PLI" -o -name "*.PL1" | \
+  xargs -I{} sh -c 'test $(wc -c < "{}") -ge 10000 && echo "{}"' | wc -l
+
+### Find COBOL files >= 10000 bytes
+find . -name "*.cbl" -o -name "*.cob" -o -name "*.CBL" -o -name "*.COB" -o -name "*.cobol" | \
+  xargs -I{} sh -c 'test $(wc -c < "{}") -ge 10000 && echo "{}"' | wc -l
+
+### Find REXX files >= 10000 bytes
+find . -name "*.rexx" -o -name "*.rex" -o -name "*.REXX" -o -name "*.exec" | \
+  xargs -I{} sh -c 'test $(wc -c < "{}") -ge 10000 && echo "{}"' | wc -l
+
+### Find JCL files >= 10000 bytes
+find . -name "*.jcl" -o -name "*.JCL" | \
+  xargs -I{} sh -c 'test $(wc -c < "{}") -ge 10000 && echo "{}"' | wc -l
+
+### Quick stats on collected files
+echo "=== File counts by extension ===" && \
+find ./collected -type f | sed 's/.*\.//' | sort | uniq -c | sort -rn
+
+echo "=== Files per language directory ===" && \
+for d in ./collected/*/final; do \
+  count=$(find "$d" -type f -not -name "manifest*" 2>/dev/null | wc -l); \
+  echo "  $(basename $(dirname $d)): $count files"; \
+done
