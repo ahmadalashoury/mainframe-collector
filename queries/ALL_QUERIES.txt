@@ -1,7 +1,6 @@
 # Mainframe Source Code Queries — Complete Reference
 #
 # This file contains all queries organized by source platform and language.
-# Use these queries with the collection scripts or manually in web UIs.
 #
 # Target: >= 1,000 files of >= 10,000 chars per language
 # Priority language: PL/I
@@ -107,7 +106,6 @@ z/Architecture assembler
 #    Endpoint: https://api.github.com/search/code?q=<QUERY>
 #    Rate limit: 10 req/min (STRICT — use sparingly)
 #    Returns: file-level results with repo info
-#    Use these AFTER exhausting repo search
 ##############################################################################
 
 ### PL/I — High precision, path-filtered
@@ -174,7 +172,6 @@ language:COBOL "EXEC CICS"
 # 3. GITHUB — Web UI Search Queries
 #    URL: https://github.com/search?type=code&q=<QUERY>
 #    Limit: 100 results per query (5 pages × 20)
-#    Use for manual exploration to discover repos not found via API
 ##############################################################################
 
 ### PL/I (your improved starting query)
@@ -246,8 +243,6 @@ https://gitlab.com/explore/projects/topics/pli
 
 ##############################################################################
 # 5. HUGGING FACE — Dataset Queries
-#    Use the `datasets` Python library
-#    No per-file rate limit — bulk download
 ##############################################################################
 
 ### The Stack v1 (deduplicated, 358 languages)
@@ -289,8 +284,7 @@ GET https://archive.softwareheritage.org/api/1/origin/https://github.com/IBM/zop
 
 ##############################################################################
 # 7. KNOWN HIGH-VALUE REPOSITORIES — Direct Clone
-#    These are VERIFIED to contain mainframe source code.
-#    git clone --depth 1 <URL>
+
 ##############################################################################
 
 ### PL/I
@@ -321,7 +315,6 @@ git clone --depth 1 https://github.com/FSoft-AI4Code/XMainframe.git
 
 ##############################################################################
 # 8. LOCAL FILE EXTRACTION COMMANDS
-#    Run these after cloning repos to find and count matching files
 ##############################################################################
 
 ### Find PL/I files >= 10000 bytes
